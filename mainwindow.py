@@ -217,6 +217,7 @@ class Ui_MainWindow(object):
         self.VidOperacii = QtWidgets.QComboBox(self.groupBox)
         self.VidOperacii.setObjectName("VidOperacii")
         self.VidOperacii.addItem("")
+        self.VidOperacii.addItem("")
         self.formLayout.setWidget(50, QtWidgets.QFormLayout.LabelRole, self.VidOperacii)
         self.DlinaSkvazhinkZaboy = QtWidgets.QLineEdit(self.groupBox)
         self.DlinaSkvazhinkZaboy.setObjectName("DlinaSkvazhinkZaboy")
@@ -277,4 +278,5 @@ class Ui_MainWindow(object):
         self.label_31.setText(_translate("MainWindow", "Расчетная плотность:"))
         self.btnResult.setText(_translate("MainWindow", "Расчет"))
         self.VidOperacii.setItemText(0, _translate("MainWindow", "подъем"))
+        self.VidOperacii.setItemText(1, _translate("MainWindow", "спуск"))
 
