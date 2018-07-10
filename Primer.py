@@ -1,40 +1,58 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton
 
-class Window1(QWidget):
-    def __init__(self):
-        super(Window1, self).__init__()
-        self.setWindowTitle('Window1')
-        self.setMinimumWidth(200)
-        self.setMinimumHeight(50)
-        self.button = QPushButton(self)
-        self.button.setText('Ok')
-        self.button.show()
+from PyQt5 import QtWidgets, QtCore
 
 
-class Window2(QWidget):
-    def __init__(self):
-        super(Window2, self).__init__()
-        self.setWindowTitle('Window2')
+class SecondWindow(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent, QtCore.Qt.Window)
+
+        self.build()
+
+    def build(self):
+        self.mainLayout = QtWidgets.QVBoxLayout()
+
+        self.edit = QtWidgets.QLineEdit(self)
+        self.mainLayout.addWidget(self.edit)
+
+        self.but1 = QtWidgets.QPushButton('close window', self)
+        self.but1.clicked.connect(self.close_window)
+        self.mainLayout.addWidget(self.but1)
+
+        self.setLayout(self.mainLayout)
+
+    def close_window(self):
+        self.close()
+        self.parent().edit.setText(self.edit.text())
 
 
-class MainWindow(QMainWindow):
-    def __init__(self):
-        super(MainWindow, self).__init__()
-        self.setWindowTitle('MainWindow')
+class MainWindow(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.secondWin = None
+        self.build()
 
-    def show_window_1(self):
-        self.w1 = Window1()
-        self.w1.button.clicked.connect(self.show_window_2)
-        self.w1.show()
+    def build(self):
+        self.mainLayout = QtWidgets.QVBoxLayout()
 
-    def show_window_2(self):
-        self.w2 = Window2()
-        self.w2.show()
+        self.edit = QtWidgets.QLineEdit(self)
+        self.mainLayout.addWidget(self.edit)
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    w = MainWindow()
-    w.show()
-    w.show_window_1()
+        self.but1 = QtWidgets.QPushButton('open window', self)
+        self.but1.clicked.connect(self.open_win)
+        self.mainLayout.addWidget(self.but1)
+
+        self.setLayout(self.mainLayout)
+
+    def open_win(self):
+        if not self.secondWin:
+            self.secondWin = SecondWindow(self)
+        self.secondWin.edit.setText('текст переданный с первой формы')
+        self.secondWin.show()
+
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
     sys.exit(app.exec_())
