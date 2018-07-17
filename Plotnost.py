@@ -73,4 +73,3 @@ class PlUi_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:10pt;\">Q</span><span style=\" font-size:10pt; vertical-align:sub;\">3</span><span style=\" font-size:10pt;\">:</span></p></body></html>"))
         self.label_4.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:10pt;\">Q</span><span style=\" font-size:10pt; vertical-align:sub;\">p:</span></p></body></html>"))
         self.pushButton.setText(_translate("MainWindow", "Вычислить"))
-
